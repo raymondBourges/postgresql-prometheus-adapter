@@ -23,7 +23,7 @@ pg_commit_rows=${pg_commit_rows:-20000}
 pg_threads="${pg_threads:-1}"
 parser_threads="${parser_threads:-5}"
 
-echo /postgresql-prometheus-adapter \
+echo ./postgresql-prometheus-adapter \
   --adapter-send-timeout=${adapter_send_timeout} \
   --web-listen-address=${web_listen_address} \
   --web-telemetry-path=${web_telemetry_path} \
@@ -35,7 +35,7 @@ echo /postgresql-prometheus-adapter \
   --pg-threads=${pg_threads} \
   --parser-threads=${parser_threads}
 
-/postgresql-prometheus-adapter \
+./postgresql-prometheus-adapter \
   --adapter-send-timeout=${adapter_send_timeout} \
   --web-listen-address=${web_listen_address} \
   --web-telemetry-path=${web_telemetry_path} \
