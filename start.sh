@@ -13,15 +13,17 @@ function shutdown() {
 }
 
 adapter_send_timeout=${adapter_send_timeout:-'30s'}
-web_listen_address="${web_listen_address:-':9201'}"
-web_telemetry_path="${web_telemetry_path:-'/metrics'}"
-log_level="${log_level:-'info'}"
-log_format="${log_format:-'logfmt'}"
-pg_partition="${pg_partition:-'hourly'}"
+web_listen_address=${web_listen_address:-':9201'}
+web_telemetry_path=${web_telemetry_path:-'/metrics'}
+log_level=${log_level:-'info'}
+log_format=${log_format:-'logfmt'}
+pg_partition=${pg_partition:-'hourly'}
 pg_commit_secs=${pg_commit_secs:-30}
 pg_commit_rows=${pg_commit_rows:-20000}
-pg_threads="${pg_threads:-1}"
-parser_threads="${parser_threads:-5}"
+pg_threads=${pg_threads:-1}
+parser_threads=${parser_threads:-5}
+
+echo "---------> On va lancer :"
 
 echo ./postgresql-prometheus-adapter \
   --adapter-send-timeout=${adapter_send_timeout} \
@@ -35,9 +37,11 @@ echo ./postgresql-prometheus-adapter \
   --pg-threads=${pg_threads} \
   --parser-threads=${parser_threads}
 
+echo "---------> On lance :"
+
 ./postgresql-prometheus-adapter \
   --adapter-send-timeout=${adapter_send_timeout} \
-  --web-listen-address=${web_listen_address} \
+  --web-listen-address=${web_listen_address}
   --web-telemetry-path=${web_telemetry_path} \
   --log.level=${log_level} \
   --log.format=${log_format} \

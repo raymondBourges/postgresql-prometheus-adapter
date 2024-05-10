@@ -1,8 +1,18 @@
-FROM centos:7
+FROM golang:1.22.3-alpine3.19
 
-MAINTAINER Yogesh Sharma <Yogesh.Sharma@CrunchyData.com>
+RUN apk add --no-cache --upgrade bash
 
-COPY postgresql-prometheus-adapter start.sh /
+# On construit l'app
+WORKDIR /usr/src/app
 
-ENTRYPOINT ["/start.sh"]
+COPY go.mod go.sum ./
+RUN go mod download && go mod verify
+
+COPY main.go .
+COPY pkg/postgresql/client.go pkg/postgresql/
+RUN go build -v -o /usr/local/bin/. ./...
+COPY start.sh /usr/local/bin/
+
+WORKDIR /usr/local/bin/
+CMD [ "./start.sh" ]
 
